@@ -1,0 +1,30 @@
+inventory_hostname is the name of the hostname as configured in Ansible’s inventory host file.
+ansible_play_hosts is the full list of all hosts still active in the current play.
+group_names is a list (array) of all the groups the current host is in.
+
+============笔记==================
+1.  
+ansible all -a "sed -i -r /root@scan05/d ~/.ssh/authorized_keys" -c paramiko -k
+ansible all -a "mkdir -p ~/.ssh;echo $(cat ~/.ssh/id_rsa.pub) >>~/.ssh/authorized_keys" -c paramiko -k
+
+ansible all  -i "localhost," -c local   -m setup
+ansible-playbok  -c local   some.yml
+
+ansible dev -m copy -a "src=~/nscan/settings/default_settings.py.dev dest=/opt/Nscan/setting/default_settings.py"
+ansible test -m copy -a "src=~/nscan/settings/default_settings.py.test dest=/opt/Nscan/setting/default_settings.py"
+ansible prod -m copy -a "src=~/nscan/settings/default_settings.py.prod dest=/opt/Nscan/setting/default_settings.py"
+ansible scan -a 'sed "8 iGEOLOC_REST = \"http://44.195.64.69/api/iplocation\"" /opt/Nscan/setting/default_settings.py -i'
+ansible scan -a "supervisorctl update;supervisorctl stop all;supervisorctl start all;supervisorctl status"
+ansible scan -a "supervisorctl status"
+2. 一些命令
+  排除主机：
+ansible all -a "echo xxx" -l '!zkscan10'
+  指定主机：去掉叹号
+  修改主机名：
+ansible all -a 'sed  -i -r "s/(127.0.0.1.*localhost).*/\1 {{ inventory_hostname }}/" /etc/hosts'
+ansible all -a "echo {{ inventory_hostname }} >/etc/hostname"
+3. 一个对返回结果的优化
+cd /usr/local/lib/python3.5/dist-packages/ansible/plugins/callback
+sed "s/result._host.get_name()/&+'  '+result._host.vars['ansible_host']/g"  minimal.py default.py -i
+4. ssh通过代理
+--ssh-common-args='-o ProxyCommand=\"nc -x 127.0.0.1:1081 %h %p\"'

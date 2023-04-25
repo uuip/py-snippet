@@ -1,0 +1,16 @@
+[vm]
+210.73.218.173
+106.3.133.182
+
+[pod]
+210.73.218.170
+210.73.218.174
+101.251.211.[197:201]
+106.3.133.181
+
+[pod:vars]
+ansible_port=20022
+
+[all:vars]
+ansible_ssh_private_key_file=/Users/sharp/Desktop/zn-key/{{inventory_hostname}}_ca
+ansible_user=root

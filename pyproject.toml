@@ -1,0 +1,60 @@
+[tool.poetry]
+name = "python"
+version = "0.1.0"
+description = ""
+authors = ["uuip <uuip@users.noreply.github.com>"]
+readme = "README.md"
+
+[[tool.poetry.source]]
+name = "tuna"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+[tool.poetry.dependencies]
+python = "^3.10"
+wheel = ">=0.38.4"
+tzdata = ">=2022.7"
+loguru = ">=0.6.0"
+arrow = ">=1.2.3"
+requests = ">=2.28.1"
+tqdm = ">=4.64.1"
+httpx = ">=0.23.1"
+pandas = ">=1.5.2"
+openpyxl = ">=3.0.10"
+rich = ">=12.6.0"
+ipython = ">=8.7.0"
+sqlalchemy = { version = ">=2.0.0", allow-prereleases = true }
+factory-boy = ">=3.2.1"
+web3 = ">=5.31.3"
+
+[tool.poetry.group.django.dependencies]
+django = "*"
+djangorestframework = ">=3.14.0"
+django-redis = ">=5.2.0"
+django-filter = ">=22.1"
+django-sql-explorer = ">=2.5"
+django-model-utils = ">=4.3.1"
+redis = ">=4.3.5"
+hiredis = ">=2.0.0"
+pyjwt = ">=2.6.0"
+model-bakery = ">=1.9.0"
+psycopg2 = ">=2.9.5"
+gunicorn = ">=20.1.0"
+
+[tool.poetry.group.fastapi.dependencies]
+fastapi = ">=0.87.0"
+uvicorn = ">=0.20.0"
+asyncpg = ">=0.27.0"
+fastapi-pagination = ">=0.10.0"
+greenlet = ">=2.0.1"
+pydantic = { extras = ["dotenv"], version = ">=1.10.2" }
+
+[tool.poetry.group.broswer.dependencies]
+playwright = ">=1.28.0"
+selenium = ">=4.7.0"
+selenium-wire = ">=4.6.5"
+webdriver-manager = ">=3.8.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

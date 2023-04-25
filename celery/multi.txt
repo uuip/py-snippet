@@ -1,0 +1,10 @@
+对task1，task2分别启动单进程的worker
+command:
+celery -A  triathon  multi start  task1 task2 default -c 10 -c:task1,task2 1 -Q:task1 q1 -Q:task2 q2 --pidfile=/tmp/celery/%n.pid -f logs/%n%i.log
+
+django setting
+CELERY_TASK_ROUTES = {"task1": 'q1','task2':'q2'}
+
+celery -A enerth worker -l info -c 4 -P gevent
+ -P, --pool [gevent|threads]
+Linux + prefork默认值
